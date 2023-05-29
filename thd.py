@@ -1,15 +1,21 @@
 import ladder as ldr
 import math
+import random
 
 
-def generate_wave(ladder, samples):
+def generate_wave(ladder, samples, dithering = False):
     # this functoin generates one full sine cycle with length of N
     output = []
     res = len(ladder[0])
 
     for i in range(samples):
         v = 0.5 + 0.4 * math.sin(2 * math.pi * i / samples)
-        v = int(v * 2**res)
+        v = int(v * (2**16))
+        bit_reduction = 16 - res
+        if dithering:
+            v += random.randrange(0, 2**(bit_reduction))
+        
+        v //= (2 ** bit_reduction)
         pin = ldr.generate_pins(v, res)
         output.append(ldr.get_output(ladder, pin) - 0.5)
 

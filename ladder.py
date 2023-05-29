@@ -7,7 +7,7 @@ def create_ladder(resolution = 8, tolerance = 1):
 
     R = []
     R2 = []
-    GND = np.random.normal(2, 2 * tolerance * 0.01)
+    GND = np.random.normal(2, 2 * tolerance * 0.02)
 
     R = np.random.normal(1, tolerance * 0.01, resolution)
     R2 = np.random.normal(2, tolerance * 0.02, resolution)
